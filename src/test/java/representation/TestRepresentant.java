@@ -51,9 +51,6 @@ public class TestRepresentant {
 	public void testCAParDefaut() {
 		float POURCENTAGE= 0.1f; // 10% de pourcentage sur CA
 		
-		// On n'enregistre aucun CA
-		r.enregistrerCA(0, 10000f);
-		
 		// On calcule son salaire pour le mois 0 avec 10% de part sur CA
 		float salaire = r.salaireMensuel(0, POURCENTAGE);
 		
@@ -82,6 +79,27 @@ public class TestRepresentant {
 		}
 
 	}
-	
+        @Test
+        public void testgetNom(){
+            assertEquals(r.getNom(),"Bastide","Le nom n'est pas correctement récupéré");
+        }
+	@Test
+        public void testsetSecteur(){
+            ZoneGeographique LYV= new ZoneGeographique(3,"LYV");
+            r.setSecteur(LYV);
+            assertEquals(r.secteur.getNom(),"LYV","Le secteur n'a pas été correctement modifié");
+        }
+        @Test
+        public void testsetCaMensuel(){
+            r.enregistrerCA(0, 1000f);
+            r.enregistrerCA(0, 3000f);
+            
+            assertEquals(r.getCAMensuel(0),3000f,"La valeur n'a pas été correctement modifiée");
+            
+        }
+        @Test
+        public void testToString(){
+            assertEquals(r.toString(),"Representant{numero=36, nom=Bastide, prenom=Rémi}", "L'affiche n'est pas correctement fait");
+        }
 	
 }
